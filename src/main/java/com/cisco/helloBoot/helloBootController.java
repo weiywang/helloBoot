@@ -1,21 +1,22 @@
 package com.cisco.helloBoot;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cisco.helloBoot.config.AuthorSettings;
+
 @RestController
 @SpringBootApplication
 public class helloBootController {
-    @Value("${program.author}")
-    private String programAuthor;
-    @Value("${program.name}")
-    private  String programName;
+    @Autowired
+    private AuthorSettings authorSettings;
     @RequestMapping("/")
+
     String index(){
-        return "Program name is:"+programName+" and program author is:"+programAuthor;
+        return "author name is:"+authorSettings.getName()+" and author age is:"+authorSettings.getAge();
     }
 
     public static void main(String[] args){
